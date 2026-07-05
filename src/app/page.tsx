@@ -176,7 +176,7 @@ export default async function Page() {
                                 </svg>
                             </a>
                         </div>
-                        <p className="text-sm font-medium text-gray-400">Desarrollado por Nodo [Soluciones Digitales]</p>
+                        <p className="text-sm font-medium text-gray-400">Seguinos en redes sociales</p>
                     </div>
                 </div>
             </footer>
