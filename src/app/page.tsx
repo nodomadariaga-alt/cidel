@@ -162,7 +162,7 @@ export default async function Page() {
 
                     {/* Columna 3: Redes Sociales */}
                     <div className="flex flex-col items-center justify-center gap-3">
-                        <p className="text-sm font-semibold text-gray-700">Seguinos en redes sociales</p>
+                        <p className="text-sm font-semibold text-gray-700">Seguinos en Redes Sociales</p>
                         <div className="flex space-x-6">
                             <a href="https://www.instagram.com/cidelgroup/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 transition-colors">
                                 <span className="sr-only">Instagram</span>
