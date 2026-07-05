@@ -10,6 +10,8 @@ interface Curso {
     categoria: string;
     imagen: string;
     activo: boolean;
+    cartelTexto: string;
+    cartelColor: string;
 }
 
 interface Props {
@@ -25,16 +27,32 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
     );
     const urlWhatsapp = `https://wa.me/${whatsappNumber}?text=${mensajeWhatsapp}`;
 
+    const getBadgeColor = (color: string) => {
+        switch (color?.toLowerCase()) {
+            case 'rojo': return 'bg-red-600 text-white';
+            case 'verde': return 'bg-emerald-600 text-white';
+            case 'azul': return 'bg-blue-600 text-white';
+            case 'amarillo': return 'bg-amber-400 text-gray-900';
+            default: return 'bg-gray-600 text-white';
+        }
+    };
+
     return (
         <>
-            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300 relative">
                 <div>
                     <div className="relative h-48 w-full bg-white border-b border-gray-100">
+                        {/* Etiqueta / Cartel del Curso */}
+                        {curso.cartelTexto && (
+                            <span className={`absolute top-3 right-3 z-10 px-3 py-1 text-xs font-extrabold rounded-full shadow-md tracking-wide uppercase ${getBadgeColor(curso.cartelColor)}`}>
+                                {curso.cartelTexto}
+                            </span>
+                        )}
+
                         {curso.imagen ? (
                             <img
                                 src={curso.imagen}
                                 alt={curso.nombre}
-                                /* CAMBIO: object-contain y p-2 para que la imagen no se recorte */
                                 className="w-full h-full object-contain p-2"
                                 loading="lazy"
                             />
@@ -96,7 +114,6 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
                                 <img
                                     src={curso.imagen}
                                     alt={curso.nombre}
-                                    /* El modal también usa object-contain por si la imagen era vertical */
                                     className="w-full h-64 sm:h-80 object-contain bg-white rounded-xl mb-6 shadow-sm border border-gray-100 p-2"
                                 />
                             )}

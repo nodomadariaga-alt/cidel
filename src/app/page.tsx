@@ -3,6 +3,7 @@ import Image from 'next/image';
 import CourseCard from '@/components/CourseCard';
 import CategoryNav from '@/components/CategoryNav';
 import FloatingSocials from '@/components/FloatingSocials';
+import AnnouncementBar from '@/components/AnnouncementBar';
 
 interface Curso {
     id: string;
@@ -10,6 +11,14 @@ interface Curso {
     descripcion: string;
     categoria: string;
     imagen: string;
+    activo: boolean;
+    cartelTexto: string;
+    cartelColor: string;
+}
+
+interface AnuncioInstitutional {
+    texto: string;
+    color: string;
     activo: boolean;
 }
 
@@ -38,7 +47,9 @@ async function getCursos(): Promise<Curso[]> {
                 descripcion: row.c[2]?.v?.toString() || '',
                 categoria: row.c[3]?.v?.toString() || 'Otros',
                 imagen: row.c[4]?.v?.toString() || '',
-                activo: isActivo
+                activo: isActivo,
+                cartelTexto: row.c[6]?.v?.toString() || '',
+                cartelColor: row.c[7]?.v?.toString() || 'gray'
             };
         }).filter((curso: Curso) => curso.activo && curso.nombre.trim() !== '');
     } catch (error) {
@@ -47,8 +58,40 @@ async function getCursos(): Promise<Curso[]> {
     }
 }
 
+async function getAnuncioInstitutional(): Promise<AnuncioInstitutional | null> {
+    const sheetId = process.env.GOOGLE_SHEET_ID;
+    if (!sheetId) return null;
+
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=config`;
+
+    try {
+        const res = await fetch(url, { next: { revalidate: 60 } });
+        const text = await res.text();
+
+        const jsonString = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+        const json = JSON.parse(jsonString);
+
+        const rows = json.table.rows;
+        if (!rows || rows.length === 0) return null;
+
+        const activoValue = rows[0]?.c[2]?.v;
+        const isActivo = activoValue === true || activoValue === 'TRUE' || activoValue === 'Yes';
+
+        return {
+            texto: rows[0]?.c[0]?.v?.toString() || '',
+            color: rows[0]?.c[1]?.v?.toString() || 'verde',
+            activo: isActivo
+        };
+    } catch (error) {
+        // Falla silenciosa si la pestaña aún no existe para evitar romper el sitio completo
+        console.warn("La pestaña 'config' no está disponible o está vacía.");
+        return null;
+    }
+}
+
 export default async function Page() {
     const cursos = await getCursos();
+    const anuncio = await getAnuncioInstitutional();
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '';
 
     const categorias = cursos.reduce((acc: { [key: string]: Curso[] }, curso) => {
@@ -63,6 +106,11 @@ export default async function Page() {
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-16">
+
+            {/* Barra de anuncios institucional controlada desde la pestaña config */}
+            {anuncio && anuncio.activo && (
+                <AnnouncementBar texto={anuncio.texto} color={anuncio.color} />
+            )}
 
             <header className="bg-white border-b border-gray-100 py-4 px-6 flex justify-between items-center shadow-sm relative z-50">
                 <div className="flex items-center space-x-3">
@@ -124,21 +172,19 @@ export default async function Page() {
 
             <FloatingSocials whatsappNumber={whatsappNumber} />
 
-            <footer className="bg-white border-t border-gray-200 pt-12 pb-6 px-4 sm:px-6 lg:px-8">
+            <footer className="bg-white border-t border-gray-200 py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
 
-                    {/* Columna 1: Logo y Copyright */}
                     <div className="flex flex-col items-center md:items-start">
                         <img
                             src="/logo.jpg"
                             alt="CIDEL Logo"
                             className="h-12 w-auto rounded-md object-contain mb-4"
                         />
-                        <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} CIDEL.</p>
+                        <p className="text-sm text-gray-500">© {new Date().getFullYear()} CIDEL.</p>
                         <p className="text-sm text-gray-500">Todos los derechos reservados.</p>
                     </div>
 
-                    {/* Columna 2: Ubicación / Dirección */}
                     <div className="flex flex-col items-center md:items-center">
                         <a
                             href="https://maps.google.com/?q=Echeverría+134,+General+Juan+Madariaga,+Buenos+Aires"
@@ -160,9 +206,8 @@ export default async function Page() {
                         </a>
                     </div>
 
-                    {/* Columna 3: Redes Sociales */}
                     <div className="flex flex-col items-center justify-center gap-3">
-                        <p className="text-sm font-semibold text-gray-700">Seguinos en Redes Sociales</p>
+                        <p className="text-sm font-semibold text-gray-700">Seguinos en redes sociales</p>
                         <div className="flex space-x-6">
                             <a href="https://www.instagram.com/cidelgroup/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 transition-colors">
                                 <span className="sr-only">Instagram</span>
@@ -180,7 +225,6 @@ export default async function Page() {
                     </div>
                 </div>
 
-                {/* Línea final */}
                 <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-gray-100 text-center">
                     <p className="text-sm font-medium text-gray-400">Desarrollado por NODO [Soluciones Digitales]</p>
                 </div>
