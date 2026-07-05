@@ -13,7 +13,6 @@ export default function AnnouncementBar({ texto, color }: Props) {
 
     if (!isOpen || !texto) return null;
 
-    // Mapeo de colores institucionales limpios y legibles
     const getColorClasses = (c: string) => {
         switch (c?.toLowerCase()) {
             case 'rojo': return 'bg-red-600 text-white';
@@ -25,14 +24,17 @@ export default function AnnouncementBar({ texto, color }: Props) {
     };
 
     return (
-        <div className={`relative w-full py-2.5 px-8 text-center text-sm font-bold shadow-sm transition-all duration-300 ${getColorClasses(color)}`}>
-            <p className="inline-block">{texto}</p>
+        <div className={`relative w-full py-3 px-10 text-center text-base sm:text-lg font-bold shadow-sm transition-all duration-300 flex items-center justify-center gap-3 ${getColorClasses(color)}`}>
+            <svg className="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <p className="inline-block tracking-wide">{texto}</p>
             <button
                 onClick={() => setIsOpen(false)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-black/10 transition-colors cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-black/10 transition-colors cursor-pointer"
                 title="Cerrar anuncio"
             >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>

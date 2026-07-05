@@ -39,16 +39,9 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
 
     return (
         <>
-            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300 relative">
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                 <div>
                     <div className="relative h-48 w-full bg-white border-b border-gray-100">
-                        {/* Etiqueta / Cartel del Curso */}
-                        {curso.cartelTexto && (
-                            <span className={`absolute top-3 right-3 z-10 px-3 py-1 text-xs font-extrabold rounded-full shadow-md tracking-wide uppercase ${getBadgeColor(curso.cartelColor)}`}>
-                                {curso.cartelTexto}
-                            </span>
-                        )}
-
                         {curso.imagen ? (
                             <img
                                 src={curso.imagen}
@@ -62,7 +55,15 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
                             </div>
                         )}
                     </div>
+
                     <div className="p-6">
+                        {/* Etiqueta reubicada arriba del título */}
+                        {curso.cartelTexto && (
+                            <span className={`inline-block mb-3 px-3 py-1 text-xs font-extrabold rounded-full shadow-sm tracking-wide uppercase ${getBadgeColor(curso.cartelColor)}`}>
+                                {curso.cartelTexto}
+                            </span>
+                        )}
+
                         <h3 className="text-xl font-bold text-gray-900 mb-2">
                             {curso.nombre}
                         </h3>
