@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import CourseCard from '@/components/CourseCard';
 import CategoryNav from '@/components/CategoryNav';
+import FloatingSocials from '@/components/FloatingSocials';
 
 interface Curso {
     id: string;
@@ -94,7 +95,6 @@ export default async function Page() {
                 </div>
             </section>
 
-            {/* Menú de navegación flotante para las áreas */}
             <CategoryNav categorias={nombresCategorias} />
 
             <main className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
@@ -122,6 +122,9 @@ export default async function Page() {
                 )}
             </main>
 
+            {/* Inyección de la barra flotante */}
+            <FloatingSocials whatsappNumber={whatsappNumber} />
+
             <footer className="bg-white border-t border-gray-200 py-10 px-4 text-center">
                 <img
                     src="/logo.jpg"
@@ -131,10 +134,10 @@ export default async function Page() {
                 <p className="text-sm text-gray-500 mb-1">&copy; {new Date().getFullYear()} CIDEL. Todos los derechos reservados.</p>
                 <p className="text-sm font-medium text-gray-400 mb-6">Desarrollado por Nodo [Soluciones Digitales]</p>
                 <div className="flex justify-center space-x-6">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 font-medium transition-colors">
+                    <a href="https://www.instagram.com/cidelgroup/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 font-medium transition-colors">
                         Instagram
                     </a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-600 font-medium transition-colors">
+                    <a href="https://www.facebook.com/p/CIDEL-GROUP-100057242360817/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-600 font-medium transition-colors">
                         Facebook
                     </a>
                 </div>

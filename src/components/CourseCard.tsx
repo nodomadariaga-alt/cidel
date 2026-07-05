@@ -21,25 +21,25 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const mensajeWhatsapp = encodeURIComponent(
-        `Me gustaria recibir más informacion sobre el curso ${curso.nombre}`
+        `Me gustaría recibir más información sobre el curso ${curso.nombre}`
     );
     const urlWhatsapp = `https://wa.me/${whatsappNumber}?text=${mensajeWhatsapp}`;
 
     return (
         <>
-            {/* Tarjeta Principal */}
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                 <div>
-                    <div className="relative h-48 w-full bg-gray-100">
+                    <div className="relative h-48 w-full bg-white border-b border-gray-100">
                         {curso.imagen ? (
                             <img
                                 src={curso.imagen}
                                 alt={curso.nombre}
-                                className="w-full h-full object-cover"
+                                /* CAMBIO: object-contain y p-2 para que la imagen no se recorte */
+                                className="w-full h-full object-contain p-2"
                                 loading="lazy"
                             />
                         ) : (
-                            <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                            <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-400 text-sm">
                                 Sin imagen de portada
                             </div>
                         )}
@@ -77,12 +77,9 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
                 </div>
             </div>
 
-            {/* Modal Overlay y Contenido */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm">
                     <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl">
-
-                        {/* Cabecera del Modal */}
                         <div className="p-6 border-b border-gray-100 flex justify-between items-start">
                             <h2 className="text-2xl font-bold text-gray-900 pr-4 leading-tight">{curso.nombre}</h2>
                             <button
@@ -94,22 +91,19 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
                                 </svg>
                             </button>
                         </div>
-
-                        {/* Cuerpo del Modal */}
                         <div className="p-6 overflow-y-auto">
                             {curso.imagen && (
                                 <img
                                     src={curso.imagen}
                                     alt={curso.nombre}
-                                    className="w-full h-64 sm:h-80 object-cover rounded-xl mb-6 shadow-sm"
+                                    /* El modal también usa object-contain por si la imagen era vertical */
+                                    className="w-full h-64 sm:h-80 object-contain bg-white rounded-xl mb-6 shadow-sm border border-gray-100 p-2"
                                 />
                             )}
                             <div className="prose max-w-none text-gray-700 whitespace-pre-line leading-relaxed">
                                 {curso.descripcion}
                             </div>
                         </div>
-
-                        {/* Pie del Modal */}
                         <div className="p-6 border-t border-gray-100 bg-gray-50 rounded-b-2xl">
                             <a
                                 href={urlWhatsapp}
