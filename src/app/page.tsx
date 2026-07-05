@@ -71,7 +71,7 @@ export default async function Page() {
                         alt="CIDEL Logo"
                         className="h-10 w-auto rounded-md object-contain"
                     />
-                    <span className="font-bold text-xl tracking-tight text-gray-800">CIDEL</span>
+                    <span className="font-bold text-xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL</span>
                 </div>
             </header>
 
@@ -86,7 +86,7 @@ export default async function Page() {
                 </div>
 
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto">
-                    <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-md">
+                    <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-md font-[family-name:var(--font-outfit)]">
                         Impulsa tu futuro laboral
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-200 font-medium max-w-2xl drop-shadow-sm">
@@ -105,7 +105,7 @@ export default async function Page() {
                 ) : (
                     nombresCategorias.map((categoria) => (
                         <section key={categoria} id={categoria.replace(/\s+/g, '-').toLowerCase()} className="mb-16 pt-8 scroll-mt-20">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-gray-100 uppercase tracking-wide inline-block">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-gray-100 uppercase tracking-wide inline-block font-[family-name:var(--font-outfit)]">
                                 {categoria}
                             </h2>
                             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -122,14 +122,14 @@ export default async function Page() {
                 )}
             </main>
 
-            {/* Inyección de la barra flotante */}
             <FloatingSocials whatsappNumber={whatsappNumber} />
 
             <footer className="bg-white border-t border-gray-200 py-10 px-4 text-center">
+                {/* Se eliminaron las clases grayscale y opacity-60 para que el logo se vea a color */}
                 <img
                     src="/logo.jpg"
                     alt="CIDEL Logo"
-                    className="h-10 w-auto rounded-md object-contain mx-auto mb-4 grayscale opacity-60"
+                    className="h-12 w-auto rounded-md object-contain mx-auto mb-4"
                 />
                 <p className="text-sm text-gray-500 mb-1">&copy; {new Date().getFullYear()} CIDEL. Todos los derechos reservados.</p>
                 <p className="text-sm font-medium text-gray-400 mb-6">Desarrollado por Nodo [Soluciones Digitales]</p>
