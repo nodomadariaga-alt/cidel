@@ -124,8 +124,8 @@ export default async function Page() {
 
             <FloatingSocials whatsappNumber={whatsappNumber} />
 
-            <footer className="bg-white border-t border-gray-200 py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            <footer className="bg-white border-t border-gray-200 pt-12 pb-6 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
 
                     {/* Columna 1: Logo y Copyright */}
                     <div className="flex flex-col items-center md:items-start">
@@ -138,7 +138,7 @@ export default async function Page() {
                         <p className="text-sm text-gray-500">Todos los derechos reservados.</p>
                     </div>
 
-                    {/* Columna 2: Ubicación / Dirección con link exacto a GMaps */}
+                    {/* Columna 2: Ubicación / Dirección */}
                     <div className="flex flex-col items-center md:items-center">
                         <a
                             href="https://maps.google.com/?q=Echeverría+134,+General+Juan+Madariaga,+Buenos+Aires"
@@ -152,7 +152,7 @@ export default async function Page() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                             <div className="text-center">
-                                <p className="font-semibold text-gray-800">Sede</p>
+                                <p className="font-semibold text-gray-800">Sede Central</p>
                                 <p className="text-sm text-gray-600">Echeverría 134</p>
                                 <p className="text-xs text-gray-500">(entre Martínez Guerrero y Moreno)</p>
                                 <p className="text-sm text-gray-600">Gral. Madariaga, Prov. Bs. As.</p>
@@ -160,8 +160,9 @@ export default async function Page() {
                         </a>
                     </div>
 
-                    {/* Columna 3: Redes Sociales y Desarrollo */}
-                    <div className="flex flex-col items-center md:items-end h-full justify-center gap-4">
+                    {/* Columna 3: Redes Sociales */}
+                    <div className="flex flex-col items-center justify-center gap-3">
+                        <p className="text-sm font-semibold text-gray-700">Seguinos en redes sociales</p>
                         <div className="flex space-x-6">
                             <a href="https://www.instagram.com/cidelgroup/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 transition-colors">
                                 <span className="sr-only">Instagram</span>
@@ -176,8 +177,12 @@ export default async function Page() {
                                 </svg>
                             </a>
                         </div>
-                        <p className="text-sm font-medium text-gray-400">Seguinos en redes sociales</p>
                     </div>
+                </div>
+
+                {/* Línea final */}
+                <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-gray-100 text-center">
+                    <p className="text-sm font-medium text-gray-400">Desarrollado por NODO [Soluciones Digitales]</p>
                 </div>
             </footer>
         </div>
