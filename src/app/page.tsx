@@ -1,6 +1,7 @@
 // ARCHIVO COMPLETO: src/app/page.tsx
 import Image from 'next/image';
 import CourseCard from '@/components/CourseCard';
+import CategoryNav from '@/components/CategoryNav';
 
 interface Curso {
     id: string;
@@ -11,7 +12,6 @@ interface Curso {
     activo: boolean;
 }
 
-// Función del lado del servidor para obtener los datos
 async function getCursos(): Promise<Curso[]> {
     const sheetId = process.env.GOOGLE_SHEET_ID;
     if (!sheetId) return [];
@@ -50,7 +50,6 @@ export default async function Page() {
     const cursos = await getCursos();
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '';
 
-    // Agrupar los cursos
     const categorias = cursos.reduce((acc: { [key: string]: Curso[] }, curso) => {
         if (!acc[curso.categoria]) {
             acc[curso.categoria] = [];
@@ -59,11 +58,12 @@ export default async function Page() {
         return acc;
     }, {});
 
+    const nombresCategorias = Object.keys(categorias);
+
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-16">
 
-            {/* Header / Navegación */}
-            <header className="bg-white border-b border-gray-100 py-4 px-6 flex justify-between items-center shadow-sm">
+            <header className="bg-white border-b border-gray-100 py-4 px-6 flex justify-between items-center shadow-sm relative z-50">
                 <div className="flex items-center space-x-3">
                     <img
                         src="/logo.jpg"
@@ -74,20 +74,16 @@ export default async function Page() {
                 </div>
             </header>
 
-            {/* Hero Section */}
             <section className="relative w-full h-[400px] sm:h-[450px]">
-                {/* Imagen de fondo del Hero */}
                 <div className="absolute inset-0">
                     <img
                         src="/hero.jpg"
                         alt="Instalaciones o alumnos de CIDEL"
                         className="w-full h-full object-cover"
                     />
-                    {/* Capa de contraste oscuro */}
                     <div className="absolute inset-0 bg-black/60"></div>
                 </div>
 
-                {/* Contenido del Hero */}
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto">
                     <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-md">
                         Impulsa tu futuro laboral
@@ -98,15 +94,17 @@ export default async function Page() {
                 </div>
             </section>
 
-            {/* Catálogo de Cursos */}
-            <main className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+            {/* Menú de navegación flotante para las áreas */}
+            <CategoryNav categorias={nombresCategorias} />
+
+            <main className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
                 {cursos.length === 0 ? (
                     <div className="text-center py-16 bg-white rounded-xl border border-gray-200 shadow-sm">
                         <p className="text-gray-500 text-lg">No hay cursos disponibles en este momento.</p>
                     </div>
                 ) : (
-                    Object.keys(categorias).map((categoria) => (
-                        <section key={categoria} className="mb-16">
+                    nombresCategorias.map((categoria) => (
+                        <section key={categoria} id={categoria.replace(/\s+/g, '-').toLowerCase()} className="mb-16 pt-8 scroll-mt-20">
                             <h2 className="text-2xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-gray-100 uppercase tracking-wide inline-block">
                                 {categoria}
                             </h2>
@@ -124,14 +122,14 @@ export default async function Page() {
                 )}
             </main>
 
-            {/* Footer */}
             <footer className="bg-white border-t border-gray-200 py-10 px-4 text-center">
                 <img
                     src="/logo.jpg"
                     alt="CIDEL Logo"
                     className="h-10 w-auto rounded-md object-contain mx-auto mb-4 grayscale opacity-60"
                 />
-                <p className="text-sm text-gray-500 mb-6">&copy; {new Date().getFullYear()} CIDEL. Todos los derechos reservados.</p>
+                <p className="text-sm text-gray-500 mb-1">&copy; {new Date().getFullYear()} CIDEL. Todos los derechos reservados.</p>
+                <p className="text-sm font-medium text-gray-400 mb-6">Desarrollado por Nodo [Soluciones Digitales]</p>
                 <div className="flex justify-center space-x-6">
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 font-medium transition-colors">
                         Instagram
