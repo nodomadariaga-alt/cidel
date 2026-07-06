@@ -4,6 +4,7 @@ import CourseCard from '@/components/CourseCard';
 import CategoryNav from '@/components/CategoryNav';
 import FloatingSocials from '@/components/FloatingSocials';
 import AnnouncementBar from '@/components/AnnouncementBar';
+import Header from '@/components/Header';
 
 interface Curso {
     id: string;
@@ -110,17 +111,8 @@ export default async function Page() {
                 <AnnouncementBar texto={anuncio.texto} color={anuncio.color} />
             )}
 
-            {/* Header Sticky con efecto Glassmorphism y Logo ampliado */}
-            <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/60 py-4 px-6 flex justify-between items-center shadow-sm transition-all duration-300">
-                <div className="flex items-center space-x-3 group cursor-pointer">
-                    <img
-                        src="/logo.jpg"
-                        alt="CIDEL Logo"
-                        className="h-14 sm:h-16 w-auto rounded-md object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <span className="font-bold text-xl sm:text-2xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL GROUP</span>
-                </div>
-            </header>
+            {/* Nuevo componente Header extraído para manejar el estado de Scroll */}
+            <Header />
 
             <section className="relative w-full h-[450px] sm:h-[500px] overflow-hidden">
                 <div className="absolute inset-0">
@@ -129,16 +121,16 @@ export default async function Page() {
                         alt="Instalaciones o alumnos de CIDEL"
                         className="w-full h-full object-cover"
                     />
-                    {/* Fondo oscuro con degradado premium */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/70 to-black/30"></div>
+                    {/* Filtro muchísimo más claro: solo un 40% de opacidad negra estática */}
+                    <div className="absolute inset-0 bg-black/40"></div>
                 </div>
 
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto">
-                    {/* Título principal con degradado metálico en el texto */}
-                    <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-400 tracking-tight mb-6 drop-shadow-sm font-[family-name:var(--font-outfit)]">
+                    {/* Sombra intensa aplicada directo al texto para que no se pierda en fondos claros */}
+                    <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6 drop-shadow-2xl font-[family-name:var(--font-outfit)]">
                         Impulsá tu futuro laboral
                     </h1>
-                    <p className="text-lg sm:text-xl text-gray-300 font-medium max-w-2xl leading-relaxed">
+                    <p className="text-lg sm:text-xl text-white font-medium max-w-2xl leading-relaxed drop-shadow-lg">
                         Capacitación integral en oficios y áreas administrativas. Elegí tu curso, inscribite y da el siguiente paso en tu carrera profesional.
                     </p>
                 </div>
