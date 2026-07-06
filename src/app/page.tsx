@@ -117,8 +117,7 @@ export default async function Page() {
                         alt="CIDEL Logo"
                         className="h-10 w-auto rounded-md object-contain"
                     />
-                    {/* MODIFICACIÓN: Ahora dice CIDEL Group */}
-                    <span className="font-bold text-xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL Group</span>
+                    <span className="font-bold text-xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL GROUP</span>
                 </div>
             </header>
 
@@ -134,10 +133,10 @@ export default async function Page() {
 
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto">
                     <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-md font-[family-name:var(--font-outfit)]">
-                        Impulsa tu futuro laboral
+                        Impulsá tu futuro laboral
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-200 font-medium max-w-2xl drop-shadow-sm">
-                        Capacitación integral en oficios y áreas administrativas. Elige tu curso, inscribite y da el siguiente paso en tu carrera profesional.
+                        Capacitación integral en oficios y áreas administrativas. Elegí tu curso, inscribite y da el siguiente paso en tu carrera profesional.
                     </p>
                 </div>
             </section>
@@ -151,10 +150,17 @@ export default async function Page() {
                     </div>
                 ) : (
                     nombresCategorias.map((categoria) => (
-                        <section key={categoria} id={categoria.replace(/\s+/g, '-').toLowerCase()} className="mb-16 pt-8 scroll-mt-20">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-gray-100 uppercase tracking-wide inline-block font-[family-name:var(--font-outfit)]">
-                                {categoria}
-                            </h2>
+                        /* Se incrementó pt-8 a pt-16 y scroll-mt-20 a scroll-mt-24 para mejorar la separación */
+                        <section key={categoria} id={categoria.replace(/\s+/g, '-').toLowerCase()} className="mb-20 pt-16 scroll-mt-24">
+
+                            {/* NUEVO DISEÑO DE ENCABEZADO DE ÁREA: Línea completa con bloque de color a la izquierda */}
+                            <div className="flex items-center gap-4 mb-10 border-b border-gray-200 pb-4">
+                                <div className="w-2.5 h-9 bg-blue-600 rounded-full flex-shrink-0"></div>
+                                <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 uppercase tracking-wider font-[family-name:var(--font-outfit)]">
+                                    {categoria}
+                                </h2>
+                            </div>
+
                             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                                 {categorias[categoria].map((curso) => (
                                     <CourseCard
@@ -197,7 +203,6 @@ export default async function Page() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                             <div className="text-center">
-                                {/* MODIFICACIÓN: Ahora dice Sede */}
                                 <p className="font-semibold text-gray-800">Sede</p>
                                 <p className="text-sm text-gray-600">Echeverría 134</p>
                                 <p className="text-xs text-gray-500">(entre Martínez Guerrero y Moreno)</p>
