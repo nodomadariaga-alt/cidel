@@ -131,7 +131,7 @@ export default async function Page() {
                         Impulsá Tu Futuro Laboral
                     </h1>
                     <p className="text-lg sm:text-xl text-white font-medium max-w-2xl leading-relaxed drop-shadow-lg">
-                        Capacitación integral en oficios y áreas administrativas. Elegí tu curso, inscribite y da el siguiente paso en tu carrera profesional.
+                        Capacitaciones Integrales - Elegí Tu Curso y da el Siguiente Paso en Tu Carrera Profesional - Tu Futuro es Hoy
                     </p>
                 </div>
             </section>
