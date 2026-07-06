@@ -20,7 +20,6 @@ export default function FloatingSocials({ whatsappNumber }: Props) {
             }
         };
 
-        // Escucha si algún modal se abrió o cerró en la página
         const handleModalChange = (e: Event) => {
             const customEvent = e as CustomEvent<boolean>;
             setIsModalOpen(customEvent.detail);
@@ -41,8 +40,9 @@ export default function FloatingSocials({ whatsappNumber }: Props) {
     const urlWhatsapp = `https://wa.me/${whatsappNumber}?text=${mensajeGeneral}`;
 
     return (
+        /* Se modificó a 'hidden md:flex' para que no exista en móviles y se active únicamente en PC */
         <div
-            className={`fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 p-2 bg-white/90 backdrop-blur-md border border-r-0 border-gray-200 rounded-l-2xl shadow-lg transition-all duration-300 ${isVisible && !isModalOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12 pointer-events-none'
+            className={`fixed right-0 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3 p-2 bg-white/90 backdrop-blur-md border border-r-0 border-gray-200 rounded-l-2xl shadow-lg transition-all duration-300 ${isVisible && !isModalOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12 pointer-events-none'
                 }`}
         >
             {/* Instagram */}
