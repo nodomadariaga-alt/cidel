@@ -104,38 +104,41 @@ export default async function Page() {
     const nombresCategorias = Object.keys(categorias);
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-16">
+        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-16 selection:bg-blue-600 selection:text-white">
 
             {anuncio && anuncio.activo && (
                 <AnnouncementBar texto={anuncio.texto} color={anuncio.color} />
             )}
 
-            <header className="bg-white border-b border-gray-100 py-4 px-6 flex justify-between items-center shadow-sm relative z-50">
-                <div className="flex items-center space-x-3">
+            {/* Header Sticky con efecto Glassmorphism */}
+            <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/60 py-4 px-6 flex justify-between items-center shadow-sm transition-all duration-300">
+                <div className="flex items-center space-x-3 group cursor-pointer">
                     <img
                         src="/logo.jpg"
                         alt="CIDEL Logo"
-                        className="h-10 w-auto rounded-md object-contain"
+                        className="h-10 w-auto rounded-md object-contain transition-transform duration-300 group-hover:scale-105"
                     />
                     <span className="font-bold text-xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL GROUP</span>
                 </div>
             </header>
 
-            <section className="relative w-full h-[400px] sm:h-[450px]">
+            <section className="relative w-full h-[450px] sm:h-[500px] overflow-hidden">
                 <div className="absolute inset-0">
                     <img
                         src="/hero.jpg"
                         alt="Instalaciones o alumnos de CIDEL"
                         className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/60"></div>
+                    {/* Fondo oscuro con degradado premium */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/70 to-black/30"></div>
                 </div>
 
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto">
-                    <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-md font-[family-name:var(--font-outfit)]">
+                    {/* Título principal con degradado metálico en el texto */}
+                    <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-400 tracking-tight mb-6 drop-shadow-sm font-[family-name:var(--font-outfit)]">
                         Impulsá tu futuro laboral
                     </h1>
-                    <p className="text-lg sm:text-xl text-gray-200 font-medium max-w-2xl drop-shadow-sm">
+                    <p className="text-lg sm:text-xl text-gray-300 font-medium max-w-2xl leading-relaxed">
                         Capacitación integral en oficios y áreas administrativas. Elegí tu curso, inscribite y da el siguiente paso en tu carrera profesional.
                     </p>
                 </div>
@@ -145,17 +148,15 @@ export default async function Page() {
 
             <main className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
                 {cursos.length === 0 ? (
-                    <div className="text-center py-16 bg-white rounded-xl border border-gray-200 shadow-sm">
+                    <div className="text-center py-16 bg-white rounded-2xl border border-gray-100 shadow-sm">
                         <p className="text-gray-500 text-lg">No hay cursos disponibles en este momento.</p>
                     </div>
                 ) : (
                     nombresCategorias.map((categoria) => (
-                        /* Se incrementó pt-8 a pt-16 y scroll-mt-20 a scroll-mt-24 para mejorar la separación */
-                        <section key={categoria} id={categoria.replace(/\s+/g, '-').toLowerCase()} className="mb-20 pt-16 scroll-mt-24">
+                        <section key={categoria} id={categoria.replace(/\s+/g, '-').toLowerCase()} className="mb-24 pt-20 scroll-mt-24">
 
-                            {/* NUEVO DISEÑO DE ENCABEZADO DE ÁREA: Línea completa con bloque de color a la izquierda */}
                             <div className="flex items-center gap-4 mb-10 border-b border-gray-200 pb-4">
-                                <div className="w-2.5 h-9 bg-blue-600 rounded-full flex-shrink-0"></div>
+                                <div className="w-2.5 h-9 bg-blue-600 rounded-full flex-shrink-0 shadow-sm shadow-blue-600/20"></div>
                                 <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 uppercase tracking-wider font-[family-name:var(--font-outfit)]">
                                     {categoria}
                                 </h2>
@@ -177,16 +178,16 @@ export default async function Page() {
 
             <FloatingSocials whatsappNumber={whatsappNumber} />
 
-            <footer className="bg-white border-t border-gray-200 py-12 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
+            <footer className="bg-white border-t border-gray-200 py-16 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center">
 
                     <div className="flex flex-col items-center md:items-start">
                         <img
                             src="/logo.jpg"
                             alt="CIDEL Logo"
-                            className="h-12 w-auto rounded-md object-contain mb-4"
+                            className="h-12 w-auto rounded-md object-contain mb-5"
                         />
-                        <p className="text-sm text-gray-500">© {new Date().getFullYear()} CIDEL.</p>
+                        <p className="text-sm text-gray-500">© {new Date().getFullYear()} CIDEL GROUP.</p>
                         <p className="text-sm text-gray-500">Todos los derechos reservados.</p>
                     </div>
 
@@ -196,33 +197,35 @@ export default async function Page() {
                             target="_blank"
                             rel="noopener noreferrer"
                             title="Ver en Google Maps"
-                            className="group flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 transition-colors"
+                            className="group flex flex-col items-center gap-3 p-4 rounded-2xl hover:bg-gray-50 transition-colors duration-300"
                         >
-                            <svg className="w-8 h-8 text-red-500 group-hover:text-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
+                            <div className="p-3 bg-red-50 text-red-500 rounded-full group-hover:bg-red-500 group-hover:text-white transition-colors duration-300">
+                                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
                             <div className="text-center">
-                                <p className="font-semibold text-gray-800">Sede</p>
+                                <p className="font-bold text-gray-900 mb-1">Sede Central</p>
                                 <p className="text-sm text-gray-600">Echeverría 134</p>
-                                <p className="text-xs text-gray-500">(entre Martínez Guerrero y Moreno)</p>
+                                <p className="text-xs text-gray-400 mt-0.5">(entre Martínez Guerrero y Moreno)</p>
                                 <p className="text-sm text-gray-600">Gral. Madariaga, Prov. Bs. As.</p>
                             </div>
                         </a>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center gap-3">
-                        <p className="text-sm font-semibold text-gray-700">Seguinos en redes sociales</p>
-                        <div className="flex space-x-6">
-                            <a href="https://www.instagram.com/cidelgroup/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-600 transition-colors">
+                    <div className="flex flex-col items-center justify-center gap-5">
+                        <p className="text-sm font-bold text-gray-800 uppercase tracking-widest">Seguinos en redes</p>
+                        <div className="flex space-x-4">
+                            <a href="https://www.instagram.com/cidelgroup/" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-50 text-gray-500 hover:bg-pink-500 hover:text-white rounded-full transition-all duration-300">
                                 <span className="sr-only">Instagram</span>
-                                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                 </svg>
                             </a>
-                            <a href="https://www.facebook.com/p/CIDEL-GROUP-100057242360817/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-600 transition-colors">
+                            <a href="https://www.facebook.com/p/CIDEL-GROUP-100057242360817/" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-50 text-gray-500 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-300">
                                 <span className="sr-only">Facebook</span>
-                                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                     <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
                                 </svg>
                             </a>
@@ -230,8 +233,8 @@ export default async function Page() {
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-gray-100 text-center">
-                    <p className="text-sm font-medium text-gray-400">Desarrollado por NODO [Soluciones Digitales]</p>
+                <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-100 text-center">
+                    <p className="text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors cursor-default">Desarrollado por NODO [Soluciones Digitales]</p>
                 </div>
             </footer>
         </div>
