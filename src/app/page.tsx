@@ -181,17 +181,18 @@ export default async function Page() {
             <footer className="bg-white border-t border-gray-200 py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center">
 
-                    <div className="flex flex-col items-center md:items-start">
+                    {/* Logo con mayor presencia y texto centrado */}
+                    <div className="flex flex-col items-center justify-center">
                         <img
                             src="/logo.jpg"
                             alt="CIDEL Logo"
-                            className="h-12 w-auto rounded-md object-contain mb-5"
+                            className="h-20 md:h-24 w-auto rounded-md object-contain mb-5"
                         />
                         <p className="text-sm text-gray-500">© {new Date().getFullYear()} CIDEL GROUP.</p>
                         <p className="text-sm text-gray-500">Todos los derechos reservados.</p>
                     </div>
 
-                    <div className="flex flex-col items-center md:items-center">
+                    <div className="flex flex-col items-center justify-center">
                         <a
                             href="https://maps.google.com/?q=Echeverria+134,+General+Madariaga,+Buenos+Aires"
                             target="_blank"
