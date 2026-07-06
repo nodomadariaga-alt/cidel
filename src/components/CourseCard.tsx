@@ -37,6 +37,16 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
         }
     };
 
+    const openModal = () => {
+        setIsModalOpen(true);
+        window.dispatchEvent(new CustomEvent('modal-change', { detail: true }));
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        window.dispatchEvent(new CustomEvent('modal-change', { detail: false }));
+    };
+
     return (
         <>
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
@@ -57,7 +67,6 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
                     </div>
 
                     <div className="p-6">
-                        {/* Etiqueta reubicada arriba del título */}
                         {curso.cartelTexto && (
                             <span className={`inline-block mb-3 px-3 py-1 text-xs font-extrabold rounded-full shadow-sm tracking-wide uppercase ${getBadgeColor(curso.cartelColor)}`}>
                                 {curso.cartelTexto}
@@ -72,7 +81,7 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
                         </p>
                         {curso.descripcion && curso.descripcion.length > 100 && (
                             <button
-                                onClick={() => setIsModalOpen(true)}
+                                onClick={openModal}
                                 className="text-blue-600 hover:text-blue-800 text-sm font-semibold underline decoration-2 underline-offset-2 cursor-pointer"
                             >
                                 Ver más detalles
@@ -102,7 +111,7 @@ export default function CourseCard({ curso, whatsappNumber }: Props) {
                         <div className="p-6 border-b border-gray-100 flex justify-between items-start">
                             <h2 className="text-2xl font-bold text-gray-900 pr-4 leading-tight">{curso.nombre}</h2>
                             <button
-                                onClick={() => setIsModalOpen(false)}
+                                onClick={closeModal}
                                 className="p-2 -mr-2 -mt-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors flex-shrink-0"
                             >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

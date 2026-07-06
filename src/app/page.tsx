@@ -83,7 +83,6 @@ async function getAnuncioInstitutional(): Promise<AnuncioInstitutional | null> {
             activo: isActivo
         };
     } catch (error) {
-        // Falla silenciosa si la pestaña aún no existe para evitar romper el sitio completo
         console.warn("La pestaña 'config' no está disponible o está vacía.");
         return null;
     }
@@ -107,7 +106,6 @@ export default async function Page() {
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-16">
 
-            {/* Barra de anuncios institucional controlada desde la pestaña config */}
             {anuncio && anuncio.activo && (
                 <AnnouncementBar texto={anuncio.texto} color={anuncio.color} />
             )}
@@ -119,7 +117,8 @@ export default async function Page() {
                         alt="CIDEL Logo"
                         className="h-10 w-auto rounded-md object-contain"
                     />
-                    <span className="font-bold text-xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL</span>
+                    {/* MODIFICACIÓN: Ahora dice CIDEL Group */}
+                    <span className="font-bold text-xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL Group</span>
                 </div>
             </header>
 
@@ -187,7 +186,7 @@ export default async function Page() {
 
                     <div className="flex flex-col items-center md:items-center">
                         <a
-                            href="https://maps.google.com/?q=Echeverría+134,+General+Juan+Madariaga,+Buenos+Aires"
+                            href="https://maps.google.com/?q=Echeverria+134,+General+Madariaga,+Buenos+Aires"
                             target="_blank"
                             rel="noopener noreferrer"
                             title="Ver en Google Maps"
@@ -198,7 +197,8 @@ export default async function Page() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                             <div className="text-center">
-                                <p className="font-semibold text-gray-800">Sede Central</p>
+                                {/* MODIFICACIÓN: Ahora dice Sede */}
+                                <p className="font-semibold text-gray-800">Sede</p>
                                 <p className="text-sm text-gray-600">Echeverría 134</p>
                                 <p className="text-xs text-gray-500">(entre Martínez Guerrero y Moreno)</p>
                                 <p className="text-sm text-gray-600">Gral. Madariaga, Prov. Bs. As.</p>
