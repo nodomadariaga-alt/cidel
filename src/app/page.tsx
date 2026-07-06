@@ -110,15 +110,15 @@ export default async function Page() {
                 <AnnouncementBar texto={anuncio.texto} color={anuncio.color} />
             )}
 
-            {/* Header Sticky con efecto Glassmorphism */}
+            {/* Header Sticky con efecto Glassmorphism y Logo ampliado */}
             <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/60 py-4 px-6 flex justify-between items-center shadow-sm transition-all duration-300">
                 <div className="flex items-center space-x-3 group cursor-pointer">
                     <img
                         src="/logo.jpg"
                         alt="CIDEL Logo"
-                        className="h-10 w-auto rounded-md object-contain transition-transform duration-300 group-hover:scale-105"
+                        className="h-14 sm:h-16 w-auto rounded-md object-contain transition-transform duration-300 group-hover:scale-105"
                     />
-                    <span className="font-bold text-xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL GROUP</span>
+                    <span className="font-bold text-xl sm:text-2xl tracking-tight text-gray-800 font-[family-name:var(--font-outfit)]">CIDEL GROUP</span>
                 </div>
             </header>
 
@@ -181,7 +181,6 @@ export default async function Page() {
             <footer className="bg-white border-t border-gray-200 py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center">
 
-                    {/* Logo con mayor presencia y texto centrado */}
                     <div className="flex flex-col items-center justify-center">
                         <img
                             src="/logo.jpg"
