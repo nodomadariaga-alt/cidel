@@ -128,7 +128,7 @@ export default async function Page() {
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto">
                     {/* Sombra intensa aplicada directo al texto para que no se pierda en fondos claros */}
                     <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6 drop-shadow-2xl font-[family-name:var(--font-outfit)]">
-                        Impulsá tu futuro laboral
+                        Impulsá Tu Futuro Laboral
                     </h1>
                     <p className="text-lg sm:text-xl text-white font-medium max-w-2xl leading-relaxed drop-shadow-lg">
                         Capacitación integral en oficios y áreas administrativas. Elegí tu curso, inscribite y da el siguiente paso en tu carrera profesional.
