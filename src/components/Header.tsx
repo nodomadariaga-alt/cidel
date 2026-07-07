@@ -8,7 +8,6 @@ export default function Header() {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Se aumentó el umbral a 80px para evitar que el cambio de tamaño genere un bucle de rebote
             if (window.scrollY > 80) {
                 setIsScrolled(true);
             } else {
@@ -22,7 +21,7 @@ export default function Header() {
 
     return (
         <header className={`sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200/60 transition-all duration-300 flex flex-col items-center justify-center ${isScrolled ? 'py-3 shadow-md' : 'py-5 sm:py-6'}`}>
-
+            
             {/* Logo y Nombre */}
             <div className="flex items-center space-x-3 group cursor-pointer">
                 <img
@@ -37,19 +36,25 @@ export default function Header() {
 
             {/* Información adicional expandible */}
             <div
-                className={`flex flex-col items-center text-center transition-all duration-300 ease-in-out origin-top ${isScrolled
-                    ? 'max-h-0 opacity-0 mt-0 pointer-events-none invisible'
-                    : 'max-h-40 opacity-100 mt-4 visible'
-                    }`}
+                className={`flex flex-col items-center text-center transition-all duration-300 ease-in-out origin-top ${
+                    isScrolled 
+                    ? 'max-h-0 opacity-0 mt-0 pointer-events-none invisible' 
+                    : 'max-h-52 opacity-100 mt-4 visible'
+                }`}
             >
+                {/* Encabezado H2 estratégico para indexación y SEO en Google */}
+                <h2 className="text-base sm:text-lg font-bold text-gray-600 tracking-tight mb-3 font-[family-name:var(--font-outfit)]">
+                    Cursos y Capacitaciones laborales
+                </h2>
+
                 <p className="text-sm sm:text-base font-extrabold text-blue-700 uppercase tracking-widest bg-blue-50 px-4 py-1 rounded-full">
-                    Cursás dos veces por mes de Abril a Octubre.
+                    Cursás dos veces por mes. De Abril a Octubre.
                 </p>
                 <p className="text-xs sm:text-sm text-gray-500 font-semibold mt-2">
-                    Echeverría 134 - Gral. Madariaga - Prov. Bs. As.
+                    Echeverría 134, Gral. Madariaga, Prov. Bs. As.
                 </p>
             </div>
-
+            
         </header>
     );
 }
