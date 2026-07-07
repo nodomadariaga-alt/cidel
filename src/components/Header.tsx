@@ -50,7 +50,7 @@ export default function Header() {
                     Cursás dos veces por mes de Abril a Octubre.
                 </p>
                 <p className="text-xs sm:text-sm text-gray-500 font-semibold mt-2">
-                    Echeverría 134, Gral. Madariaga, Prov. Bs. As.
+                    Echeverría 134 - Gral. Madariaga - Prov. Bs. As.
                 </p>
             </div>
 
